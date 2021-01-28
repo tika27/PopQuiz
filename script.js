@@ -1,5 +1,36 @@
-//jquery
-//1. (play the game) dynamically append data (jquery) 05:11
+//  click the start button: 
+    //timer starts 
+    //presented with a question and choices
+    //display timer
+    //LATER: view high scorearea
+
+// when user clicks on answer :
+    //displays wrong or right
+    //go to next question
+    //index++;
+//question incorrectly
+    //:  time is subtracted from the clock (reduce 15s)
+//game over:
+//timer hits 0
+//OR no more ans
+
+// WHEN the game is over:
+//:save  initials and  score
+//see high score or //LATER clear highscore
+
+var startQuizEl = document.querySelector("#start-quiz");
+
+
+
+
+
+
+
+
+
+
+
+//1. (play the game) dynamically append data 
 //onclick
 //2. timer: timer app from tutor
 //3. local storage: 04: pgm 26
@@ -28,25 +59,9 @@ function displayQuestions(){
 }
     //wrong or right
 }
-//  click the start button: 
-    //timer starts 
-    //presented with a question and choices
-    //display timer
-    //LATER: view high scorearea
 
-// when user clicks on answer :
-    //displays wrong or right
-    //go to next question
-    //index++;
-//question incorrectly
-    //:  time is subtracted from the clock (reduce 15s)
-//game over:
-//timer hits 0
-//OR no more ans
 
-// WHEN the game is over:
-//:save  initials and  score
-//see high score or //LATER clear highscore
+
 
 function start(){
     //title
