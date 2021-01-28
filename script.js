@@ -18,206 +18,215 @@
 //:save  initials and  score
 //see high score or //LATER clear highscore
 
-var currentQuestionIndex = 0;
-var time = questions.length * 20;
-var timeId;
 
-var timeEl = document.querySelector("#time");
-var startBtn = document.querySelector("#StartButton");
-var submitBtn = document.querySelector("#submit-button");
-var titleScreen = document.querySelector("#title-section");
-var quizScreen = document.querySelector("#quiz-section");
-var highScoreScreen = document.querySelector("#highscore-section");
-var highScoreDisplay = document.querySelector("#highscore-display");
-var initialsEl = document.querySelector("#initials");
-var feedbackEl = document.querySelector("#feedback");
-var questionsEl = document.querySelector("#question");
-var choicesEl = document.querySelector("#choices");
+var startQuizEl = document.querySelector("#start-quiz");
+var introEl = document.querySelector("#intro");
+var containerEl = document.querySelector(".container");
+var countdownEl = document.querySelector("#countdown");
+var quizQuestionnaireEl = document.querySelector("#quiz-questionnaire");
+var navigateToResultsPageEL = document.querySelector("#navigate_to_result");
+var submitButtonEl = document.querySelector("#submitbtn");
+var initialContainer = document.querySelector("#initial");
+var formEl = document.querySelector("form");
+
+var score = 0;
+var seconds = 75;
+var result = "";
+var userInitial = "";
 
 var questions = [
-    {
-        title: "Which of the following is true about variable naming conventions in JavaScript?"
-        
-        choices: [" A: You should not use any of the JavaScript reserved keyword as variable name", 
-        "B:JavaScript variable names should not start with a numeral (0-90)",
-        "C:Both of the above", "D:None of the above."],
-        
-        answer: "Both of the above"
-
-    }, 
-    {
-        title: "Which of the following is the correct syntax to redirect a url using JavaScript?"
-       
-        choices: [ "A:document.location='http://www.newlocation.com';",
-
-        "B:browser.location='http://www.newlocation.com';",
-        
-        "C:navigator.location='http://www.newlocation.com';",
-        
-        "D:window.location='http://www.newlocation.com';"]
-       
-        answer: "window.location='http://www.newlocation.com';"
-
-    }, 
-    {
-        title: "Which built-in method returns the length of the string?"
-       
-        choices: ["A:length()", "B:size()", "C:index()", "D:None of the above."]
-       
-        answer: "length()"
-
-    }, 
-    {
-        title: "Which built-in method returns the characters in a string beginning at the specified location?"
-        
-        choices: ["A:substr()","B:getSubstring()", "C:slice()", "D:None of the above."]
-        
-        answer: "substr()"
-
-    }, 
-    {
-        title: "Which of the following function of Boolean object returns a string containing the source of the Boolean object?"
-        
-        choices: ["A:toSource()", "B:valueOf()", "C:toString()", "D: None of the above."]
-        
-        answer: "toSource()"
-
-    }, 
+  {
+    title: "Commonly used data types DO NOT include:",
+    choices: ["strings", "booleans", "alerts", "numbers"],
+    answer: "alerts"
+  },
+  {
+    title: "The condition in an if / else statement is enclosed within ____.",
+    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+    answer: "parentheses"
+  },
+  {
+    title: "Arrays in JavaScript can be used to store ____.",
+    choices: [
+      "numbers and strings",
+      "other arrays",
+      "booleans",
+      "all of the above"
+    ],
+    answer: "all of the above"
+  },
+  {
+    title:
+      "String values must be enclosed within ____ when being assigned to variables.",
+    choices: ["commas", "curly brackets", "quotes", "parentheses"],
+    answer: "quotes"
+  },
+  {
+    title:
+      "A very useful tool used during development and debugging for printing content to the debugger is:",
+    choices: ["JavaScript", "terminal / bash", "for loops", "console.log"],
+    answer: "console.log"
+  }
+];
 
 
-]
-
-
-function startQuiz() {
-    titleScreen.setAttribute("class", "hide");
-
-    quizScreen.setAttribute("class", "show");
-
-    timeId = setInterval(tick, 1000);
-
-    timeEl.textContent = time;
-
-    getQuestion();
-
-}
-
-function tick() {
-    time--;
-
-    timeEl.textContent = time;
-
-    if (time<= 0) {
-        quizEnd();
-    }
-}
-
-function getQuestion() {
-
-    var currentQuestion = questions[currentQuestionIndex];
+if (startQuizEl) {
+startQuizEl.addEventListener("click", function(event) {
+  event.preventDefault();
+  introEl.setAttribute("class", "hide");
+  countdownTimer();
+ 
+  var i = 0;
+  displayQuestionAtIndex(i);
+  var choiceList = document.querySelector("ol");
+  choiceList.addEventListener("click", function(event) {
+    event.preventDefault;
+    var userSelection = event.target.innerText;
+    var correctAnswer = questions[i]["answer"];
+    result = displayResultforIndividualQuestion(userSelection, correctAnswer);
+    result ? seconds : seconds = seconds - 10 
     
-    titleEl.textContent = currentQuestion.title;
+    i++;
+    displayQuestionAtIndex(i);
+    var choiceList = document.querySelector("ol");
+    choiceList.addEventListener("click", function(event) {
+      event.preventDefault;
+      var userSelection = event.target.innerText;
+      var correctAnswer = questions[i]["answer"];
+      result = displayResultforIndividualQuestion(userSelection, correctAnswer);
+      result ? seconds : seconds = seconds - 10      
 
-    choicesEl.innerHTML = "";
+      i++;
+      displayQuestionAtIndex(i);
+      var choiceList = document.querySelector("ol");
+      choiceList.addEventListener("click", function(event) {
+        event.preventDefault;
+        var userSelection = event.target.innerText;
+        var correctAnswer = questions[i]["answer"];
+        result = displayResultforIndividualQuestion(userSelection, correctAnswer);
+        result ? seconds : seconds = seconds - 10
 
-    currentQuestion.choices. forEach(function(choose, i) {
-        
-        var choiceNode = document.createElement("button");
+        i++;
+        displayQuestionAtIndex(i);
+        var choiceList = document.querySelector("ol");
+        choiceList.addEventListener("click", function(event) {
+          event.preventDefault;
+          var userSelection = event.target.innerText;
+          var correctAnswer = questions[i]["answer"];
+          result = displayResultforIndividualQuestion(userSelection, correctAnswer);
+          result ? seconds : seconds = seconds - 10
 
-        choiceNode.setAttribute("class", "choice");
+          i++;
+          displayQuestionAtIndex(i);
+          var choiceList = document.querySelector("ol");
+          choiceList.addEventListener("click", function(event) {
+            event.preventDefault;
+            var userSelection = event.target.innerText;
+            var correctAnswer = questions[i]["answer"];
+            result = displayResultforIndividualQuestion(userSelection, correctAnswer);
+            result ? seconds : seconds = seconds - 10
+            $("#quiz-questionnaire").empty();
+            displayResult();
+          });  
+          
+        });  
+          
+      });
 
-        choiceNode.setAttribute("value", choose);
-
-        choiceNode.onclick = questionClick;
-
-        choicesEl.appendChild(choiceNode);
-
-    });
+    });     
+ 
+  });
+  
+});
 }
 
-function questionClick() {
 
-    if (this.value !==questions[currentQuestionIndex].answers) {
-
-        time-= 20;
-
-        if (time < 0) {
-            time = 0;
-        }
-
-        timeEl.textContent = time;
-
-        feedbackEl.textContent = "wrong!";
-    } else {
-        feedbackEl.textContent = "Correct!";
+function submitFunc(){
+  submitButtonEl.addEventListener("click", function(event) {
+    event.preventDefault();
+    userInitial = initialContainer.value;
+    console.log(userInitial);
+    window.location.href = "highscores.html";
+    var userScoreCard = {
+      "user-initial": userInitial,
+      "user-score": score
     }
+    localStorage.setItem("user-score-card", JSON.stringify(userScoreCard));  
+  });
+}
 
-    feedbackEl.setAttribute("class", "feedback");
-    setTimeout(function() {
-        feedbackEl.setAttribute("class", "feedback hide");
-    }, 1000); 
-
-    currentQuestionIndex++;
-
-    if (currentQuestionIndex === questions.length) {
-        
-        quizEnd();
-
-    } else {
-
-        getQuestion();
+function countdownTimer() {
+  countdownEl.textContent = seconds;  
+  var countdown = setInterval(function() {
+    seconds--;
+    countdownEl.textContent = seconds;
+    i = 0;
+    if (seconds <= 0) {
+      clearInterval(countdown);
+      countdownEl.textContent = "";
+      $("#quiz-questionnaire").empty();
+      displayResult();
     }
+  }, 1000);
 }
 
-function quizEnd() {
 
-    clearInterval(timeId);
-
-    var highscoreSectionEl = document.querySelector("#highscore-section");
-    
-    highscoreSectionEl.setAttribute("class", "show");
-
-    var finalScoreEl = document.querySelector("#final-score");
-
-    finalScoreEl.textContent = time;
-
-    quizScreen.setAttribute("class", "hide");
+function displayQuestionAtIndex(i) {
+  $("#quiz-questionnaire").empty();
+  var divEl = document.createElement("div");
+  divEl.textContent = questions[i]["title"];
+  quizQuestionnaireEl.appendChild(divEl);
+  divEl.setAttribute("class", "question");
+  var questionDivEl = document.querySelector(".question");
+  var olEl = document.createElement("ol");
+  questionDivEl.appendChild(olEl);
+  olEl.setAttribute("class", "choices");
+  var choicesOl = document.querySelector(".choices");
+  var li1El = document.createElement("li")
+  var li2El = document.createElement("li")
+  var li3El = document.createElement("li")
+  var li4El = document.createElement("li")  
+  li1El.textContent = questions[i]["choices"][0];
+  choicesOl.appendChild(li1El);
+  li1El.setAttribute("class", "choice-item");  
+  li2El.textContent = questions[i]["choices"][1];
+  choicesOl.appendChild(li2El);
+  li2El.setAttribute("class", "choice-item");    
+  li3El.textContent = questions[i]["choices"][2];
+  choicesOl.appendChild(li3El);
+  li3El.setAttribute("class", "choice-item");
+  li4El.textContent = questions[i]["choices"][3];
+  choicesOl.appendChild(li4El);
+  li4El.setAttribute("class", "choice-item");  
 }
 
-function saveHighscore() {
-    
-    var initials = initialsEl.value.trim();
 
-    if (initials !=="") {
-        var highscore = JSON.parse(window.localStorage.getItem("highscores")) || [];
-
-        var newScore = {
-
-            score: time,
-
-            initials: initials
-        };
-
-        highscore.push(newScore);
-
-        window.localStorage.setItem("highscores", JSON.stringify(highscores));
-
-        window.localStorage.href = "Score.html";
-
-    } 
+function displayResultforIndividualQuestion(userPick, correctAnswer) {
+  divClassEl = document.querySelector(".question");
+  divClassEl.appendChild(document.createElement("hr"));
+  var divEl = document.createElement("div");   
+  if (userPick === correctAnswer) { 
+    score++;              
+    divEl.textContent = "Correct!";
+    divClassEl.appendChild(divEl); 
+    return true;    
+  }
+  else {
+    divEl.textContent = "Wrong!";
+    divClassEl.appendChild(divEl);
+    return false;   
+  }
 }
 
-function checkForEnter(event) {
-    if (event.key === "Enter") {
-        saveHighscore();
-    }
+
+function displayResult() {
+  resultDiv = document.querySelector("#display-result");
+  resultDiv.removeAttribute("class", "hide");
+  seconds = 0;
+  scoreEl = document.querySelector("#test-score");
+  scoreEl.textContent = score + " / 5"; 
+  submitFunc();
 }
-
-submitBtn.onclick = startQuiz;
-
-initialsEl.onkeyup = checkForEnter;
-
-
-
 
 
 
@@ -244,9 +253,6 @@ initialsEl.onkeyup = checkForEnter;
 //     console.log(game.question[index])
 //     //choices
  
-//     for(var i=0;i<game.choices[index].length;i++){
-//     console.log(game.choices[index][i])
-//     console.log(game.answers[index])
 // }
 //     //wrong or right
 // }
@@ -280,5 +286,3 @@ initialsEl.onkeyup = checkForEnter;
 // //once they hit the submit (onlick)
 // //display all the users with score
 // //option to go back (start() or clear local straoge)
-
-// displayQuestions();
